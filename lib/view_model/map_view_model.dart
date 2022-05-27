@@ -3,10 +3,15 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../model/place.dart';
+
 class MyPageModel extends ChangeNotifier {
   String? errorTxt;
+  Place? searchedPlace;
+  String distance ="0.0";
   late GoogleMapController controller;
   late final CameraPosition currentPosition;
+  final TextEditingController textController = TextEditingController();
 
   Future<void> getCurrentPosition() async {
     LocationPermission permission = await Geolocator.checkPermission(); //権限チェック
@@ -39,13 +44,13 @@ class MyPageModel extends ChangeNotifier {
 
   //ピンのセット メソッド
   final Set<Marker> markers = {
-    const Marker(
-        infoWindow: InfoWindow(title: "舎人公園", snippet: "舎人公園はこちらです"),
-        markerId: MarkerId("1"),
-        position: LatLng(
-          35.796976811368246,
-          139.77157591137333,
-        )),
+    // const Marker(
+    //     infoWindow: InfoWindow(title: "舎人公園", snippet: "舎人公園はこちらです"),
+    //     markerId: MarkerId("1"),
+    //     position: LatLng(
+    //       35.796976811368246,
+    //       139.77157591137333,
+    //     )),
   };
 
   //位置情報　検索メソッド
